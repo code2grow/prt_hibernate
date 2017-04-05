@@ -1,0 +1,5 @@
+
+enable logging
+test manifest file in unix box
+include junit testing
+we can add the csrf validation- sample there
