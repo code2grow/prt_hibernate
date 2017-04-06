@@ -1,0 +1,119 @@
+Base.java
+
+ @Entity
+    @NamedQueries({ @NamedQuery(name="Employee.findAll", query = "SELECT e FROM Employee e"), 
+                    @NamedQuery(name="Student.findAll", query = "SELECT s FROM Student s") })
+
+    public class Base {
+        @Id
+        private long id;
+
+    }
+Employee.java
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Employee")
+public class Employee implements Serializable {
+    @Id 
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+
+    @Column(name="name")
+    private String name;
+
+    @Column(name="salary")
+    private float salary;
+
+    // Setters and getters
+}
+Student.java
+
+ import java.io.Serializable;        
+ import javax.persistence.Column;
+ import javax.persistence.Entity;
+ import javax.persistence.GeneratedValue;
+ import javax.persistence.GenerationType;
+ import javax.persistence.Id;
+ import javax.persistence.Table;
+
+@Entity
+@Table(name="Student")
+public class Student implements Serializable {
+    @Id 
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+
+    @Column(name="name")
+    private String name;
+
+    @Column(name="salary")
+    private float salary;
+
+    // setters and getters
+}
+
+Application.java
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
+
+public class Application {
+    private static String PERSISTENCE_UNIT_NAME = "EmployeeService";
+    public static void main(String[] args) {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+
+        // Before executing this query insert some records
+
+        Query query = entityManager.createNamedQuery("Employee.findAll", Employee.class);
+        query.setFirstResult(0);
+        query.setMaxResults(10);
+
+        @SuppressWarnings("unchecked")
+        List<Employee> employees = query.getResultList();
+        System.out.println(" \n "+employees);
+
+        /*Student student = new Student();
+        student.setName("Ranga");
+        student.setSalary(15000);
+        try {       
+            entityTransaction.begin();
+            entityManager.persist(student);
+            System.out.println("Student Information: "+student);
+            entityTransaction.commit();         
+        } catch(PersistenceException ex) {          
+            entityTransaction.rollback();
+        }*/
+
+        // Before executing this query insert some records
+
+        query = entityManager.createNamedQuery("Student.findAll", Student.class);
+        query.setFirstResult(0);
+        query.setMaxResults(10);
+
+        @SuppressWarnings("unchecked")
+        List<Student> students = query.getResultList();
+        System.out.println(" \n "+students);        
+
+    }
+}
+
+
+
+http://www.journaldev.com/3451/hibernate-named-query-example-namedquery
