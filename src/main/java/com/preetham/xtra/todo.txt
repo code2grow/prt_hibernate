@@ -3,3 +3,8 @@ enable logging
 test manifest file in unix box
 include junit testing
 we can add the csrf validation- sample there
+
+try out the examples from the following links:  
+http://levelup.lishman.com/hibernate/hql/joins.php  
+http://www.concretepage.com/hibernate/hibernate-hql-associations-and-inner-join-left-outer-join-right-outer-join-cross-join-example http://www.thoughts-on-java.org/how-to-join-unrelated-entities/  
+http://www.codejava.net/frameworks/hibernate/hibernate-one-to-many-association-on-join-table-annotations-example http://www.java4s.com/hibernate/hibernate-one-to-one-mapping-using-annotations/
