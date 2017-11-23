@@ -21,3 +21,6 @@ Go on the project's root folder, then type:
 
 Import as *Existing Maven Project* and run it as *Spring Boot App*.
 
+
+
+https://www.concretepage.com/spring-boot/spring-boot-logging-example
