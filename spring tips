@@ -1,0 +1,17 @@
+XTRA FILES:
+// Use this to generate insert some data into tables during the application-start
+ @Bean 
+    @DependsOn("entityManagerFactory") 
+    public ResourceDatabasePopulator initDatabase(DataSource dataSource) throws Exception { 
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator(); 
+        populator.addScript(new ClassPathResource("data.sql")); 
+        populator.populate(dataSource.getConnection()); 
+        return populator; 
+    } 
+    or use the below in application.properties : 
+    spring.datasource.data=classpath:data.sql	
+    
+    or use this for appending platform with data or schema.sql:
+    spring.datasource.platform=mysql
+    
+    
