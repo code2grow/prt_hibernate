@@ -15,3 +15,23 @@ XTRA FILES:
     spring.datasource.platform=mysql
     
     
+    -----------------------Include admainapplication .class
+    @Autowired
+    DataSource ds;
+    
+    @Bean
+    public DataSourceInitializer dataSourceInitializer() {
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+        resourceDatabasePopulator.addScript(new ClassPathResource("data-mysql.sql"));
+
+        DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
+
+        // the call to the above method
+        dataSourceInitializer.setDataSource(ds);
+
+
+        dataSourceInitializer.setDatabasePopulator(resourceDatabasePopulator);
+
+        return dataSourceInitializer;
+    }
+    
